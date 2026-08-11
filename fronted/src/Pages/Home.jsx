@@ -113,7 +113,7 @@ export default function Home(){
                     Manage and monitor your students
                 </p>
               
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2  lg:grid-cols-4  gap-4 px-25">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2  lg:grid-cols-4  gap-4 ">
                     <StatCard icon={<FaUserGraduate/>} messsage={"Total Students"} value={totalStudents}/>
                     <StatCard icon={<MdMenuBook/>} messsage={"Total Courses"} value={totalUnits}/>
                     <StatCard icon={<MdMenuBook/>} messsage={"Total CS students"} value={totalCsStudents}/>
