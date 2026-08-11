@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 import api from "../services/api"
-export default function StudentForm({fetchStudents, editingStudent, setEditingStudent }){
+import {toast} from "react-toastify"
+export default function StudentForm({fetchStudents,loading,setLoading, editingStudent, setEditingStudent }){
  const[form,setForm] = useState(
         {
             name:"",
@@ -11,16 +12,18 @@ export default function StudentForm({fetchStudents, editingStudent, setEditingSt
         }
     )
     const handleSubmit=async(e)=>{
-            try {
                 e.preventDefault();
+                setLoading(true)
+            try {
                 if (editingStudent) {
                         await api.put(`/students/${editingStudent._id}`, form);
-                        alert("Student Updated successfully!!")
+                        toast.success("Student Updated successfully!!")
                         setEditingStudent(null);
                     } else {
-                        await api.post("/students", form);
+                        await api.post("/students",form);
+                        toast.success("Student added Successfully!!")
                     }
-                fetchStudents();
+                await fetchStudents();
                 
                 setForm(
                     {
@@ -32,11 +35,16 @@ export default function StudentForm({fetchStudents, editingStudent, setEditingSt
 
                     }
                 )
-
                 
             } catch (error) {
-                alert(error)
-            }}         
+                toast.error(error.response?.data?.error || "Something went wrong")
+            }
+
+            finally{
+                setLoading(false)
+            }
+        
+        }         
 
 
              useEffect(() => {
@@ -51,7 +59,7 @@ export default function StudentForm({fetchStudents, editingStudent, setEditingSt
             }
         }, [editingStudent]);
     return(
-        <div className="bg-slate-100 m-6 w-2xl  shadow-sm hover:bg-slate-200 duration-300">
+        <div className="bg-white  w-lg shadow-sm hover:bg-slate-200 duration-300">
             <h1 className="p-2 text-center text-3xl font-semi-bold">{editingStudent ? "Edit Student" : "Add Student"}</h1>
             <form onSubmit={handleSubmit}
             className="p-6 "
@@ -96,8 +104,17 @@ export default function StudentForm({fetchStudents, editingStudent, setEditingSt
                 />
 
                 <button 
+                type="submit"
+                disabled={loading}
                 className="bg-green-500 w-full py-2 rounded-xl text-lg  hover:bg-green-600 transition duration-300">
-                    {editingStudent ? "update Student " :"AddStudent"}
+                    {loading
+                    ?"Saving..."
+                    :editingStudent
+                    ?"Update Student"
+                    :"Add Student"
+                    }
+                 
+                    {/* {editingStudent ? "update Student " :"Add Student"} */}
                     </button>
 
             </form>
