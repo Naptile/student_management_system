@@ -9,11 +9,10 @@ and filter records, sort data, paginate results, and visualize students
 by course.
 
 ------------------------------------------------------------------------
+## Live url https://student-management-system-sepia-kappa.vercel.app/
 
 ## 📸 Screenshots
 
-> **Note:** Add your actual project screenshots to `screenshots/` using
-> the filenames below. The README is already prepared to display them.
 
 ### 🖥️ Desktop Dashboard
 
@@ -589,7 +588,7 @@ parent:
 ### 1. Clone the repository
 
 ``` bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/Naptile/student_management_system.git
 ```
 
 ### 2. Enter the project
