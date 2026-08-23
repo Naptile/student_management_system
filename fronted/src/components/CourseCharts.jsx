@@ -32,7 +32,7 @@ export default function CourseCharts({ students }) {
 
 
     return (
-        <div className="bg-white rounded-xl shadow-lg  w-lg p-4 sm:p-6 mt-8 mb-8 w-full max-w-5xl">
+        <div className="bg-white rounded-xl shadow-lg  w-full p-4 sm:p-6 mt-8 mb-8 w-full max-w-5xl">
 
             <h2 className="text-xl sm:text-2xl font-bold mb-4">
                 Students Per Course

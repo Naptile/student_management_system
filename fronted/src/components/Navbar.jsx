@@ -3,24 +3,21 @@ import {useState} from "react"
 export default function Navbar({search,setSearch}){
     const[menuOpen,setMenuOpen]=useState(false);
     return(
-        <nav className="bg-white border-b border-slate-300 shadow-sm mb-3 p-4 border  ">
-            <div className="hidden md:flex  justify-between items-center ">
-                <div className="flex gap-2 items-center">
+        <nav className="bg-white border-b border-slate-300 shadow-sm mb-3 p-4 border w-full ">
+            <div className="hidden md:flex  justify-center items-center gap-4 ">
+                <div className="flex gap-2 items-center ">
                     <div className="text-6xl">🎓</div>
-                     <h1 className="font-bold text-xl ">Student Management System</h1>
+                     <h1 className=" font-bold text-xl ">Student Management System</h1>
                 </div>
                 <input type="text"
                 placeholder="Search name email course yearAdmitted AdmissionNumber"
                 value={search}
                 onChange={(e)=>setSearch(e.target.value)}
                 className="bg-gray-100  w-2xl rounded-xl py-3 px-13 outline-green-400 focus:ring-2 focus:ring-green-500 focus:outline-none"
-                />
-                
-                <button className="bg-blue-500 px-4 py-2 rounded-xl hover:bg-green-600 text-lg text-white font-bold">Add Student +</button>
-                
-                 <div>
-                    welcome <span className="text-2xl ">👋</span> 
-
+                />              
+                <button className="b bg-blue-500 px-4 py-2 rounded-lg whitespace-nowrap text-white font-bold hover:bg-blue-700 transition-colors">Add student+</button>
+                 <div >
+                    welcome <span className="text-2xl ">👋</span>                 
                  </div>
             </div>
 
@@ -34,7 +31,7 @@ export default function Navbar({search,setSearch}){
                     >
                         ☰
                     </button>
-                    <h1 className="font-bold text-xl">
+                    <h1 className="font-bold text-xl font-serif text-blue-800">
                         Student Management System
                     </h1>
                 </div>

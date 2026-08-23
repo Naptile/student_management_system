@@ -101,7 +101,7 @@ export default function Home(){
             )
 
     return(
-        <div className="min-h-screen bg-slate-50 ">
+        <div className="min-h-screen bg-slate-50 w-full ">
             <Navbar search={search} setSearch={setSearch} />
 
             <div className="mb-6">  
@@ -113,14 +113,14 @@ export default function Home(){
                     Manage and monitor your students
                 </p>
               
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2  lg:grid-cols-4  gap-4 ">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2  lg:grid-cols-4  gap-4 ">
                     <StatCard icon={<FaUserGraduate/>} messsage={"Total Students"} value={totalStudents}/>
                     <StatCard icon={<MdMenuBook/>} messsage={"Total Courses"} value={totalUnits}/>
                     <StatCard icon={<MdMenuBook/>} messsage={"Total CS students"} value={totalCsStudents}/>
                     <StatCard icon={<FaCalendarAlt className="text-purple-500"/>} messsage={"Averange Years"} value={averageYears}/>
                 </div> 
-                <div className="flex flex-col md:flex-row gap-3 m-4 items-center  w-full ">
-                     <div className="overflow-x-auto "><CourseCharts students={students}  /></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3  items-center  w-full ">
+                      <CourseCharts students={students}  />                      
                       <StudentsForm fetchStudents={fetchStudents} editingStudent={editingStudent}  setEditingStudent={setEditingStudent} loading={loading} setLoading={setLoading}  /> 
                     
                  </div>                   

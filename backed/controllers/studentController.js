@@ -46,9 +46,10 @@ exports.createStudent = async(req,res) =>{
  try {
         const{name,email,admissionNumber,course,yearAdmitted} = req.body;
         const student = new Student({name,email,admissionNumber,course,yearAdmitted});
-        const studentExist = await Student.findOne({email});
+        const studentExists = await Student.findOne({email});
         if(studentExists){
-            return res.status(400).json("Student alreadt exists");
+            return res.status(400).json({
+                message:"Student alreadt exists"});
         }
         await student.save();
         res.status(201).json({
@@ -56,7 +57,8 @@ exports.createStudent = async(req,res) =>{
             student
         });
     } catch (error) {
-        res.status(201).json({error:error.message});
+        res.status(500).json({
+            error:error.message});
     }
 }
 

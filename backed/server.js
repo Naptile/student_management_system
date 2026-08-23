@@ -11,10 +11,11 @@ const app = express();
 connectDB();
 app.use(express.json());
 app.use(cors(
-  {
-    origin:"https://student-management-system-sepia-kappa.vercel.app/",
-    methods:["GET","POST","UPDATE","DELETE"]
-  }
+  // {
+  //   origin:"https://student-management-system-sepia-kappa.vercel.app/",
+  //   methods:["GET","POST","UPDATE","DELETE"]
+  // },
+  
 ));
 
 app.get("/",async(req,res)=>{

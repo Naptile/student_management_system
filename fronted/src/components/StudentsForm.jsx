@@ -11,6 +11,8 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
             yearAdmitted:"",
         }
     )
+
+    const [error,setError]= useState("");
     const handleSubmit=async(e)=>{
                 e.preventDefault();
                 setLoading(true)
@@ -37,7 +39,8 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
                 )
                 
             } catch (error) {
-                toast.error(error.response?.data?.error || "Something went wrong")
+                toast.error(error.response?.data?.error ||error.response?.data?.message || "Something went wrong")
+                setError(error.response?.data?.error ||error.response?.data?.message || error.message)
             }
 
             finally{
@@ -59,8 +62,11 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
             }
         }, [editingStudent]);
     return(
-        <div className="bg-white  w-lg shadow-sm hover:bg-slate-200 duration-300">
-            <h1 className="p-2 text-center text-3xl font-semi-bold">{editingStudent ? "Edit Student" : "Add Student"}</h1>
+        <div className=" flex flex-col items-center justify-center  w-full lg:w-lg  bg-white shadow-xl border border-slate-300 ">
+            {error&&(
+                <p className="text-red-500 m-2">{error}</p>
+            )}
+            <h1 className=" text-center text-3xl font-semi-bold p-4">{editingStudent ? "Edit Student" : "Add Student"}</h1>
             <form onSubmit={handleSubmit}
             className="p-6 "
             >
@@ -69,7 +75,7 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
                 value={form.name}
                 onChange={(e)=>setForm({...form,name:e.target.value})}
                 required
-                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl  hover:ring-3  active:ring-green-500 hover:ring-green-500 hover:outline-none mb-3 transition duration-300"
+                className="w-full px-6 py-2 bg-gray-300   rounded-xl  outline-green-500 hover:bg-gray-200 mb-3  mb-3 transition duration-300"
                 />
 
                 <input type="email"
@@ -77,7 +83,7 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
                 value={form.email}
                 onChange={(e)=>setForm({...form,email:e.target.value})}
                 required
-                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl  hover:ring-3  active:ring-green-500 hover:ring-green-500 hover:outline-none mb-3 transition duration-300"
+                className="w-full px-6 py-2 bg-gray-300  outline-green-500 rounded-xl hover:bg-gray-200 mb-3 transition duration-300"
                 />
 
                 <input type="text" 
@@ -85,28 +91,38 @@ export default function StudentForm({fetchStudents,loading,setLoading, editingSt
                 value={form.admissionNumber}
                 onChange={(e)=>setForm({...form,admissionNumber:e.target.value})}
                 required
-                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl  hover:ring-3  active:ring-green-500 hover:ring-green-500 hover:outline-none mb-3 transition duration-300"
+                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl hover:bg-gray-200 mb-3  outline-green-500   mb-3 transition duration-300"
                 />
-
-                <input type="text"
-                placeholder="Course"
+                <select 
                 value={form.course}
-                onChange={(e)=>setForm({...form,course:e.target.value})}
-                required
-                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl  hover:ring-3  active:ring-green-500 hover:ring-green-500 hover:outline-none mb-3 transition duration-300"
-                />
+                 onChange={(e)=>setForm({...form,course:e.target.value})}
+                 className="w-full px-6 py-2 bg-gray-300   rounded-xl  outline-green-500 hover:bg-gray-200 mb-3  mb-3 transition duration-300"
+                 
+                 >
+                   <option value="">Choose course</option>
+                    <option value="math">Math</option>
+                    <option value="english">English</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                    <option value="kiswahili">Kiswahili</option>
+                    <option value="physics">Physics</option>
+                    <option value="agriculture">Agriculture</option>
+                    <option value="cre">CRE</option>
+                    <option value="homeScience">Home Science</option>
+                </select>
+               
                 <input type="number"
                 placeholder="Year Admitted"
                 value={form.yearAdmitted}
                 onChange={(e)=>setForm({...form,yearAdmitted:e.target.value})}
                 required
-                className="w-full px-6 py-2 bg-gray-300  outline:green-500 rounded-xl  hover:ring-3  active:ring-green-500 hover:ring-green-500 hover:outline-none mb-3 transition duration-300"
+                className="w-full px-6 py-2 bg-gray-300  rounded-xl hover:bg-gray-200  mb-3 outline-green-500  mb-3 transition-colors duration-300 "
                 />
 
                 <button 
                 type="submit"
                 disabled={loading}
-                className="bg-green-500 w-full py-2 rounded-xl text-lg  hover:bg-green-600 transition duration-300">
+                className="bg-green-500 w-full py-2 rounded-xl text-lg   transition-colors duration-300">
                     {loading
                     ?"Saving..."
                     :editingStudent
