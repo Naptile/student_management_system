@@ -26,7 +26,7 @@ const studentSchema = new mongoose.Schema({
     course:{
         type:String,
         required:true,
-        enum:["maths","english","chemistry","biology","physics","kiswahili","agriculture","homeScience","cre"],
+        enum:["math","english","chemistry","biology","physics","kiswahili","agriculture","homeScience","cre"],
     },
     status:{
         type:String,
